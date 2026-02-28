@@ -1,61 +1,127 @@
 'use client';
+
+// Hero section component
+import Image from 'next/image';
 import { motion } from 'framer-motion';
 
 export default function Hero() {
+  const floatingAnimation = {
+    y: [0, -15, 0],
+    rotate: [0, 2, -2, 0],
+    transition: {
+      duration: 6,
+      repeat: Infinity,
+      ease: "easeInOut",
+    },
+  };
+
   return (
-    <div className="min-h-screen bg-black text-[#F2EBE3] flex flex-col relative overflow-hidden">
+    <main className="w-full min-h-screen bg-[#050505] flex items-center justify-center overflow-hidden">
       
-
-      <header className="w-full p-6 flex justify-between items-center z-20">
-        <div className="text-sm tracking-widest uppercase">Elen Khachatryan</div>
-        <nav className="space-x-6 text-sm">
-          <a href="#work" className="hover:opacity-70 transition-opacity">Work</a>
-          <a href="#about" className="hover:opacity-70 transition-opacity">About</a>
-        </nav>
-      </header>
-
-
-      <main className="flex-1 flex flex-col items-center justify-center z-10 relative">
+      <div className="relative w-full max-w-[1440px] h-screen max-h-[1000px] overflow-hidden bg-[#050505]">
         
-        <h1 className="text-8xl md:text-[150px] font-bold tracking-tighter uppercase mb-12 z-20">
-          Portfolio
-        </h1>
+        <Image 
+          src="/images/bg.png" 
+          alt="Red Background" 
+          fill
+          priority
+          sizes="(max-width: 1440px) 100vw, 1440px"
+          className="object-cover z-0"
+        />
+        <Image 
+          src="/images/texture.png" 
+          alt="Dark Texture Overlay" 
+          fill
+          sizes="(max-width: 1440px) 100vw, 1440px"
+          className="object-cover z-10 opacity-70 mix-blend-multiply"
+        />
 
-
-        <div className="flex gap-10 md:gap-32 relative z-30">
-          
-
-          <motion.img 
-            src="/images/eye-lf.png" 
-            alt="Organic texture left"
-            className="w-48 md:w-80 cursor-grab active:cursor-grabbing"
-            drag
-            dragConstraints={{ left: -100, right: 100, top: -100, bottom: 100 }}
-            animate={{ y: [0, -20, 0] }} 
-            transition={{ repeat: Infinity, duration: 5, ease: "easeInOut" }}
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
-          />
-
-
-          <motion.img 
-            src="/images/eye-rh.png" 
-            alt="Organic texture right"
-            className="w-48 md:w-80 cursor-grab active:cursor-grabbing"
-            drag
-            dragConstraints={{ left: -100, right: 100, top: -100, bottom: 100 }}
-            animate={{ y: [0, -25, 0] }} // Slightly different timing for organic feel
-            transition={{ repeat: Infinity, duration: 6, ease: "easeInOut", delay: 0.5 }}
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
+        <div className="absolute inset-0 z-20 flex items-center justify-center pointer-events-none">
+          <Image 
+            src="/images/women.png" 
+            alt="Central Figure" 
+            width={600}
+            height={800}
+            className="h-[65%] w-auto object-contain drop-shadow-2xl"
           />
         </div>
 
-        <h2 className="text-4xl md:text-6xl font-light tracking-tight mt-12 z-20">
-          Elen Khachatryan
-        </h2>
+        <div className="absolute inset-y-0 left-0 w-1/2 md:w-[55%] z-30 pointer-events-none">
+          <Image 
+            src="/images/left-crack.png" 
+            alt="Left Crack" 
+            fill
+            sizes="(max-width: 1440px) 55vw, 800px"
+            className="object-cover object-left" 
+          />
+        </div>
+        <div className="absolute inset-y-0 right-0 w-1/2 md:w-[55%] z-30 pointer-events-none">
+          <Image 
+            src="/images/right-crack.png" 
+            alt="Right Crack" 
+            fill
+            sizes="(max-width: 1440px) 55vw, 800px"
+            className="object-cover object-right" 
+          />
+        </div>
 
-      </main>
-    </div>
+
+        <motion.div
+          className="absolute left-[15%] top-[50%] -translate-y-1/2 z-40 cursor-pointer w-60 h-60 md:w-120 md:h-120"
+          animate={floatingAnimation}
+          whileHover={{ 
+            scale: 1.05, 
+            x: -15, 
+            y: -10, 
+            rotate: -5,
+            transition: { type: "spring", stiffness: 100, damping: 10 }
+          }}
+        >
+          <Image src="/images/left-eye.png" alt="Left eye" fill sizes="320px" className="object-contain" />
+        </motion.div>
+
+        <motion.div
+          className="absolute right-[15%] top-[50%] -translate-y-1/2 z-40 cursor-pointer w-65 h-65 md:w-120 md:h-120"
+          animate={floatingAnimation}
+          whileHover={{ 
+            scale: 1.05, 
+            x: 15, 
+            y: -10, 
+            rotate: 5,
+            transition: { type: "spring", stiffness: 100, damping: 10 }
+          }}
+        >
+          <Image src="/images/right-eye.png" alt="Right eye" fill sizes="320px" className="object-contain" />
+        </motion.div>
+
+        <div className="absolute left-6 md:left-12 top-0 bottom-0 py-8 flex items-center justify-center z-50 pointer-events-none">
+          <h1 
+            className="text-[#F5E1D9] font-black uppercase whitespace-nowrap"
+            style={{ 
+              writingMode: 'vertical-rl', 
+              transform: 'rotate(180deg)',
+              fontSize: 'clamp(3rem, 7.5vh, 6rem)', 
+              letterSpacing: '0.15em'
+            }}
+          >
+            Portfolio
+          </h1>
+        </div>
+
+        <div className="absolute right-6 md:right-12 top-0 bottom-0 py-8 flex items-center justify-center z-50 pointer-events-none">
+          <h1 
+            className="text-[#F5E1D9] font-black uppercase whitespace-nowrap"
+            style={{ 
+              writingMode: 'vertical-rl',
+              fontSize: 'clamp(3rem, 7.5vh, 6rem)', 
+              letterSpacing: '0.15em'
+            }}
+          >
+            Helen Khachatryan
+          </h1>
+        </div>
+
+      </div>
+    </main>
   );
 }
