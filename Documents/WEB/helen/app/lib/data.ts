@@ -191,12 +191,15 @@ export const projectDetails = {
       { src: '/images/bacteria/bacteria-bag-fabric-2.png', alt: 'Knitting Machine Texture', fit: 'cover' as const },
       { src: '/images/bacteria/bacteria-bag-fabric-3.png', alt: 'Fabric Manipulation', fit: 'cover' as const },
       { src: '/images/bacteria/bacteria-bag-fabric-4.png', alt: 'Yarn Details', fit: 'cover' as const },
+      { src: '/images/bacteria/bacteria-bag-fabric-5.png', alt: 'Yarn Details', fit: 'cover' as const },
     ],
     products: [
       { src: '/images/bacteria/bacteria-bag-runway-1.jpg', alt: 'Runway Look 1', fit: 'cover' as const },
       { src: '/images/bacteria/bacteria-bag-runway-2.jpg', alt: 'Runway Look 2', fit: 'cover' as const },
       { src: '/images/bacteria/bacteria-bag-runway-3.jpg', alt: 'Runway Look 3', fit: 'cover' as const },
       { src: '/images/bacteria/bacteria-bag-runway-4.jpg', alt: 'Runway Look 4', fit: 'cover' as const },
+      { src: '/images/bacteria/bacteria-bag-runway-5.jpg', alt: 'Runway Look 5', fit: 'cover' as const },
+      { src: '/images/bacteria/bacteria-bag-runway-6.jpg', alt: 'Runway Look 6', fit: 'cover' as const },
     ]
   },
   '06': {
@@ -208,22 +211,25 @@ export const projectDetails = {
     techniques: ['Upcycling', 'Knitting', 'Braiding'],
     stages: [],
     sketches: [
-      { src: '/images/tumo-upcycle-sketch-1.png', alt: 'Design Sketch 1', fit: 'contain' as const },
-      { src: '/images/tumo-upcycle-sketch-2.png', alt: 'Design Sketch 2', fit: 'contain' as const },
-      { src: '/images/tumo-upcycle-sketch-3.png', alt: 'Design Sketch 3', fit: 'contain' as const },
-      { src: '/images/tumo-upcycle-sketch-4.png', alt: 'Design Sketch 4', fit: 'contain' as const },
+      { src: '/images/tumo/tumo-upcycle-sketch-1.png', alt: 'Design Sketch 1', fit: 'contain' as const },
+      { src: '/images/tumo/tumo-upcycle-sketch-2.png', alt: 'Design Sketch 2', fit: 'contain' as const },
+      { src: '/images/tumo/tumo-upcycle-sketch-3.png', alt: 'Design Sketch 3', fit: 'contain' as const },
+      { src: '/images/tumo/tumo-upcycle-sketch-4.png', alt: 'Design Sketch 4', fit: 'contain' as const },
+      { src: '/images/tumo/tumo-upcycle-sketch-5.png', alt: 'Design Sketch 5', fit: 'contain' as const },
     ],
     materialImages: [
-      { src: '/images/tumo-upcycle-fabric-1.jpg', alt: 'Wet Felting Process', fit: 'cover' as const },
-      { src: '/images/tumo-upcycle-fabric-2.jpg', alt: 'Knitting Machine Texture', fit: 'cover' as const },
-      { src: '/images/tumo-upcycle-fabric-3.jpg', alt: 'Fabric Manipulation', fit: 'cover' as const },
-      { src: '/images/tumo-upcycle-fabric-4.jpg', alt: 'Yarn Details', fit: 'cover' as const },
+      { src: '/images/tumo/tumo-upcycle-fabric-1.png', alt: 'Wet Felting Process', fit: 'cover' as const },
+      { src: '/images/tumo/tumo-upcycle-fabric-2.png', alt: 'Knitting Machine Texture', fit: 'cover' as const },
+      { src: '/images/tumo/tumo-upcycle-fabric-3.png', alt: 'Fabric Manipulation', fit: 'cover' as const },
+      { src: '/images/tumo/tumo-upcycle-fabric-4.png', alt: 'Yarn Details', fit: 'cover' as const },
+      { src: '/images/tumo/tumo-upcycle-fabric-5.png', alt: 'Yarn Details', fit: 'cover' as const },
     ],
     products: [
-      { src: '/images/tumo-upcycle-runway-1.jpg', alt: 'Runway Look 1', fit: 'cover' as const },
-      { src: '/images/tumo-upcycle-runway-2.jpg', alt: 'Runway Look 2', fit: 'cover' as const },
-      { src: '/images/tumo-upcycle-runway-3.jpg', alt: 'Runway Look 3', fit: 'cover' as const },
-      { src: '/images/tumo-upcycle-runway-4.jpg', alt: 'Runway Look 4', fit: 'cover' as const },
+      { src: '/images/tumo/tumo-upcycle-runway-1.jpg', alt: 'Runway Look 1', fit: 'cover' as const },
+      { src: '/images/tumo/tumo-upcycle-runway-2.jpg', alt: 'Runway Look 2', fit: 'cover' as const },
+      { src: '/images/tumo/tumo-upcycle-runway-3.jpg', alt: 'Runway Look 3', fit: 'cover' as const },
+      { src: '/images/tumo/tumo-upcycle-runway-4.jpg', alt: 'Runway Look 4', fit: 'cover' as const },
+      { src: '/images/tumo/tumo-upcycle-runway-5.jpg', alt: 'Runway Look 5', fit: 'cover' as const },
     ]
   }
 };
