@@ -24,7 +24,7 @@ export default function Hero() {
   };
 
   return (
-    <main className="w-full min-h-screen bg-[#050505] flex items-center justify-center overflow-hidden">
+    <main id="home" className="w-full min-h-screen bg-[#050505] flex items-center justify-center overflow-hidden">
       
       <div className="relative w-full max-w-[1440px] h-screen max-h-[1000px] overflow-hidden bg-[#050505]">
         
@@ -58,21 +58,29 @@ export default function Hero() {
             scale: isHovered ? 1.03 : 1,
             filter: isHovered 
               ? "drop-shadow(0px 0px 45px rgba(220, 38, 38, 0.8))"
-              : "drop-shadow(0px 10px 20px rgba(0, 0, 0, 0.5))"
+              : [
+                  "drop-shadow(0px 10px 20px rgba(0, 0, 0, 0.5))",
+                  "drop-shadow(0px 0px 35px rgba(220, 38, 38, 0.5))",
+                  "drop-shadow(0px 10px 20px rgba(0, 0, 0, 0.5))"
+                ]
           }}
-          transition={{ duration: 1.5, ease: "easeOut" }}
+          transition={{ 
+            duration: isHovered ? 1.5 : 2, 
+            repeat: isHovered ? 0 : Infinity,
+            ease: "easeInOut" 
+          }}
         >
           <Image 
             src="/images/women.png" 
             alt="Central Figure" 
             width={600}
             height={800}
-            className="h-[65%] w-auto object-contain pointer-events-none"
+            className="h-[50%] md:h-[65%] w-auto object-contain pointer-events-none"
           />
         </motion.div>
 
         <motion.div 
-          className="absolute inset-y-0 left-0 w-1/2 md:w-[55%] z-30 pointer-events-none"
+          className="hidden xl:block absolute inset-y-0 left-0 w-[55%] z-30 pointer-events-none"
           animate={{ 
             x: isHovered ? -30 : 0,
             filter: isHovered 
@@ -85,13 +93,13 @@ export default function Hero() {
             src="/images/left-crack.png" 
             alt="Left Crack" 
             fill
-            sizes="(max-width: 1440px) 55vw, 800px"
+            sizes="55vw"
             className="object-cover object-left" 
           />
         </motion.div>
 
         <motion.div 
-          className="absolute inset-y-0 right-0 w-1/2 md:w-[55%] z-30 pointer-events-none"
+          className="hidden xl:block absolute inset-y-0 right-0 w-[55%] z-30 pointer-events-none"
           animate={{ 
             x: isHovered ? 30 : 0,
             filter: isHovered 
@@ -104,13 +112,13 @@ export default function Hero() {
             src="/images/right-crack.png" 
             alt="Right Crack" 
             fill
-            sizes="(max-width: 1440px) 55vw, 800px"
+            sizes="55vw"
             className="object-cover object-right" 
           />
         </motion.div>
 
         <motion.div
-          className="absolute left-[15%] top-[50%] -translate-y-1/2 z-40 cursor-pointer w-60 h-60 md:w-120 md:h-120"
+          className="absolute left-0 right-0 mx-auto xl:mx-0 xl:right-auto xl:left-[15%] top-[50%] -translate-y-1/2 z-40 cursor-pointer w-32 h-32 md:w-64 md:h-64 xl:w-120 xl:h-120 flex items-center justify-center"
           animate={floatingAnimation}
           whileHover={{ 
             scale: 1.05, 
@@ -120,11 +128,11 @@ export default function Hero() {
             transition: { type: "spring", stiffness: 100, damping: 10 }
           }}
         >
-          <Image src="/images/left-eye.png" alt="Left eye" fill sizes="320px" className="object-contain" />
+          <Image src="/images/left-eye.png" alt="Left eye" fill sizes="(max-width: 1280px) 256px, 320px" className="object-contain" />
         </motion.div>
 
         <motion.div
-          className="absolute right-[15%] top-[50%] -translate-y-1/2 z-40 cursor-pointer w-65 h-65 md:w-120 md:h-120"
+          className="hidden xl:block absolute right-[15%] top-[50%] -translate-y-1/2 z-40 cursor-pointer w-120 h-120"
           animate={floatingAnimation}
           whileHover={{ 
             scale: 1.05, 
@@ -137,13 +145,12 @@ export default function Hero() {
           <Image src="/images/right-eye.png" alt="Right eye" fill sizes="320px" className="object-contain" />
         </motion.div>
 
-       <div className="absolute left-4 md:left-8 top-0 bottom-0 py-8 flex items-center justify-center z-50 pointer-events-none">
+       <div className="absolute left-1 md:left-8 top-0 bottom-0 py-8 flex items-center justify-center z-50 pointer-events-none">
           <h1 
-            className={`${leagueGothic.className} text-[#F5E1D9] uppercase whitespace-nowrap`}
+            className={`${leagueGothic.className} text-[#F5E1D9] uppercase whitespace-nowrap text-[4.5rem] min-[400px]:text-[5rem] md:text-[clamp(6rem,16vh,14rem)]`}
             style={{ 
               writingMode: 'vertical-rl', 
               transform: 'rotate(180deg)',
-              fontSize: 'clamp(6rem, 16vh, 14rem)', 
               letterSpacing: '0.02em',
             }}
           >
@@ -151,12 +158,11 @@ export default function Hero() {
           </h1>
         </div>
 
-        <div className="absolute right-4 md:right-8 top-0 bottom-0 py-8 flex items-center justify-center z-50 pointer-events-none">
+        <div className="absolute right-1 md:right-8 top-12 md:top-0 bottom-0 pt-24 pb-8 md:py-8 flex items-center justify-center z-50 pointer-events-none">
           <h1 
-            className={`${leagueGothic.className} text-[#F5E1D9] uppercase whitespace-nowrap`}
+            className={`${leagueGothic.className} text-[#F5E1D9] uppercase whitespace-nowrap text-[4.5rem] min-[400px]:text-[5rem] md:text-[clamp(6rem,16vh,14rem)]`}
             style={{ 
               writingMode: 'vertical-rl',
-              fontSize: 'clamp(6rem, 16vh, 14rem)', 
               letterSpacing: '0.02em',
             }}
           >

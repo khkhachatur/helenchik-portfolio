@@ -12,12 +12,11 @@ const leagueGothic = League_Gothic({
   display: 'swap',
 });
 
-
 export default function Works() {
   const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
 
   return (
-    <section className="w-full min-h-screen bg-[#050505] text-[#F5E1D9] py-24 px-4 md:px-8 relative z-10">
+    <section id="works" className="w-full min-h-screen bg-[#050505] text-[#F5E1D9] py-24 px-4 md:px-8 relative z-10">
       <div className="max-w-[1440px] mx-auto">
         
         <div className="mb-16 md:mb-24 flex flex-col md:flex-row md:items-end justify-between border-b border-[#F5E1D9]/20 pb-8 z-20 relative">
@@ -34,7 +33,7 @@ export default function Works() {
             <Link href={`/works/${project.id}`} key={project.id} className="block w-full z-20">
               
               <motion.div
-                className="group relative flex flex-col md:flex-row md:items-center justify-between py-10 md:py-16 border-b border-[#F5E1D9]/10 cursor-pointer"
+                className="group relative flex flex-col lg:flex-row lg:items-center justify-between py-10 md:py-16 border-b border-[#F5E1D9]/10 cursor-pointer"
                 onMouseEnter={() => setHoveredIndex(index)}
                 onMouseLeave={() => setHoveredIndex(null)}
                 initial={{ opacity: 0, y: 30 }}
@@ -57,6 +56,17 @@ export default function Works() {
                   >
                     {project.title}
                   </motion.h3>
+                </div>
+
+                <div className="block lg:hidden relative w-full aspect-video mt-8 mb-6 overflow-hidden rounded-sm pointer-events-none">
+                  <Image 
+                    src={project.image} 
+                    alt={project.title} 
+                    fill 
+                    className="object-cover opacity-80"
+                    sizes="(max-width: 1024px) 100vw, 0px"
+                  />
+                  <div className="absolute inset-0 bg-red-900/10 mix-blend-multiply" />
                 </div>
 
                 <motion.div
@@ -83,18 +93,18 @@ export default function Works() {
                   </div>
                 </motion.div>
 
-                <div className="flex items-center gap-8 mt-4 md:mt-0 pointer-events-none">
-                  <div className="text-left md:text-right transition-transform duration-300 group-hover:-translate-x-4">
-                    <p className="text-lg md:text-xl font-light uppercase tracking-widest">
+                <div className="flex items-center gap-8 mt-2 md:mt-0 pointer-events-none">
+                  <div className="text-left md:text-right transition-transform duration-300 lg:group-hover:-translate-x-4">
+                    <p className="text-lg md:text-xl font-light uppercase tracking-widest text-[#F5E1D9]">
                       {project.category}
                     </p>
-                    <p className="text-sm md:text-md opacity-50 font-mono mt-1">
+                    <p className="text-sm md:text-md opacity-50 font-mono mt-1 text-[#F5E1D9]">
                       {project.year}
                     </p>
                   </div>
                   
                   <motion.div 
-                    className="hidden md:flex items-center justify-center w-12 h-12 rounded-full border border-[#F5E1D9]/30"
+                    className="hidden lg:flex items-center justify-center w-12 h-12 rounded-full border border-[#F5E1D9]/30"
                     animate={{ 
                       rotate: hoveredIndex === index ? -45 : 0,
                       backgroundColor: hoveredIndex === index ? '#F5E1D9' : 'transparent',

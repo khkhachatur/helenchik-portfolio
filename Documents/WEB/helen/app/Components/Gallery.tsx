@@ -40,14 +40,16 @@ const GridBlock = () => (
     {blockItems.map((item, index) => (
       <div key={index} className="flex items-center justify-center w-full h-full">
         <div className="group relative w-[300px] aspect-[4/5] overflow-hidden rounded-sm bg-[#0A0A0A] border border-[#F5E1D9]/10 shadow-2xl">
+          
           <Image
             src={item.src}
             alt={item.title}
             fill
             quality={100}
-            className="object-cover transition-transform duration-700 ease-out group-hover:scale-105 opacity-80 group-hover:opacity-100 pointer-events-none select-none"
+            className="object-cover transition-transform duration-700 ease-out lg:group-hover:scale-105 opacity-100 lg:opacity-80 lg:group-hover:opacity-100 pointer-events-none select-none"
           />
-          <div className="absolute inset-0 bg-gradient-to-t from-[#050505]/90 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex flex-col justify-end p-6 pointer-events-none">
+          
+          <div className="absolute inset-0 bg-gradient-to-t from-[#050505]/90 via-transparent to-transparent opacity-100 lg:opacity-0 lg:group-hover:opacity-100 transition-opacity duration-500 flex flex-col justify-end p-6 pointer-events-none">
             <h3 className={`${leagueGothic.className} text-3xl text-[#F5E1D9] uppercase tracking-wide drop-shadow-md`}>
               {item.title}
             </h3>
@@ -55,6 +57,7 @@ const GridBlock = () => (
               {item.desc}
             </p>
           </div>
+
         </div>
       </div>
     ))}

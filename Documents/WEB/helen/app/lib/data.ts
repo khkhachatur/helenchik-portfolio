@@ -255,7 +255,7 @@ export const galleryItems = [
   { id: 18, src: '/images/gallery/gallery-18.jpg', title: '"Imprisonment"', desc: 'Experimental double-exposure portrait highlighting ethereal textures' },
   { id: 19, src: '/images/gallery/gallery-19.jpg', title: 'Dynamic Ink Study', desc: 'Rapid brushstroke silhouette capturing motion and attitude' },
   { id: 20, src: '/images/gallery/gallery-20.jpg', title: 'Illustration', desc: 'Look development combining digital illustration with tactile swatches' },
- { id: 21, src: '/images/gallery/gallery-21.jpg', title: '"Imprisonment"', desc: 'Gritty lighting emphasizing the raw edges of the "Imprisonment" dress' },
+  { id: 21, src: '/images/gallery/gallery-21.jpg', title: '"Imprisonment"', desc: 'Gritty lighting emphasizing the raw edges of the "Imprisonment" dress' },
   { id: 22, src: '/images/gallery/gallery-22.jpg', title: 'Illustration', desc: 'Illustration and swatch exploration inspired by organic forms' },
   { id: 23, src: '/images/gallery/gallery-23.jpg', title: 'Urban Silhouette', desc: 'Monochrome structural sketch with extended strap detailing' },
   { id: 24, src: '/images/gallery/gallery-24.jpg', title: 'Tactile Moodboard', desc: 'Mixed media and red thread mapping the chaos of the collection process' },
@@ -271,4 +271,60 @@ export const galleryItems = [
   { id: 34, src: '/images/gallery/gallery-34.jpg', title: '"Imprisonment"', desc: 'Conceptual double-exposure emphasizing translucent, veined fabric textures' },
   { id: 35, src: '/images/gallery/gallery-35.jpg', title: 'Illustration', desc: 'Stylized illustration focusing on contrasting textures and cinched waistlines' },
   { id: 36, src: '/images/gallery/gallery-36.jpg', title: '"Imprisonment"', desc: 'Asymmetrical runway silhouette demonstrating advanced Nuno felting' },
+];
+
+
+
+export const fashionExperience = [
+  { year: '2025', title: 'Fashion Scout Armenia Polimoda Prize', role: 'Winner' },
+  { year: '2025', title: 'TUMO Studios Internship Knitwear Collection', role: 'Brand: @h.lelenh' },
+  { year: '2023', title: 'Photo Vogue Competition', role: 'Styling Assistant' },
+  { year: '2023', title: 'Naira Khachatryan\'s Fashion Show "Nature Within"', role: 'Backstage Dresser' },
+  { year: '2023', title: 'Sonya Avagyan\'s "Dragons" Collection', role: 'Assistant' },
+];
+
+export const handsOnExperience = [
+  { year: '2025', title: 'Materials & Manipulation', instructor: 'Shanshan Ruan / TUMO' },
+  { year: '2025', title: 'Hand-Lettering', instructor: 'Liza Rasskazova & Anna Khorash / TUMO' },
+  { year: '2025', title: 'Contemporary Sashiko & Boro', instructor: 'Karina Tanabe Jones / TUMO' },
+  { year: '2025', title: 'Uniform for Moscow Transport Museum', instructor: 'Tanmay Saxena / TUMO' },
+  { year: '2025', title: 'Embroidery Tech Course', instructor: 'Mariam Gharibyan / TUMO' },
+  { year: '2023', title: 'Bag Construction', instructor: 'Armin Sahakyan / TUMO' },
+  { year: '2023', title: 'Machine Knitting Tech Course', instructor: 'Victoria Salmon / TUMO' },
+  { year: '2023', title: 'Felt Bags: Design, Knitting, Dyeing', instructor: 'Diane Goignoux / TUMO' },
+  { year: '2023', title: 'Embroidery Accessories', instructor: 'Mariam Gharibyan / TUMO' },
+  { year: '2023', title: 'Fashion Sketching', instructor: 'Lili Mehrabyan / TUMO' },
+  { year: '2023', title: 'Pattern Making Tech Course', instructor: 'Anna Rafaelyan / TUMO' },
+  { year: '2023', title: 'Doll Making (Paper-Mache & Costume)', instructor: 'Susanna Alaverdyan' },
+];
+
+export const education = [
+  { year: '2023—2025', title: 'TUMO Studios', desc: '' },
+  { year: '2020—2023', title: 'Hayordyats Tun Cultural Center (Yerevan)', desc: 'Fine Arts' },
+  { year: '2021—2023', title: 'Hayordyats Tun Cultural Center (Ejmiatsin)', desc: 'Fine Arts' },
+  { year: '2020—2022', title: 'A. Margaryan High School No.29', desc: '' },
+];
+
+
+export const skills = ['Styling', 'Sketching', 'Crafting', 'Photography', 'Videography', 'Sewing', 'Hand Knitting', 'Machine Knitting', 'Crochet', 'Embroidery', 'Macrame'];
+export const tools = ['Adobe Illustrator', 'Adobe Photoshop', 'Figma'];
+export const languages = ['Armenian (Native)', 'Russian (Native)', 'English (Advanced)', 'Portuguese (Intermediate)'];
+
+export const certificates = [
+  { 
+    id: 1, 
+    title: 'Fashion Scout Armenia: Polimoda Prize', 
+    issuer: 'Yerevan Fashion Week & Fashion Scout', 
+    year: '2025',
+    pdfLink: '/pdfs/POLIMODA-PRIZE.pdf', 
+    image: '/pdfs/POLIMODA-PRIZE.jpg' 
+  },
+  { 
+    id: 2, 
+    title: 'Outstanding Volunteer Contribution', 
+    issuer: 'Naira Khachatryan - "Nature Within You"', 
+    year: '2023',
+    pdfLink: '/pdfs/Certificate-Helen.pdf', 
+    image: '/pdfs/Certificate-Helen.jpg' 
+  }
 ];
