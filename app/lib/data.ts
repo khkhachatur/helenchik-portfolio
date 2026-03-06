@@ -10,7 +10,7 @@ export const projects = [
     title: 'IMPRISONMENT',
     category: 'Fashion Collection',
     year: '2026',
-    image: '/images/imprisonment.jpeg',
+    image: '/images/imprisonment.JPEG',
   },
   {
     id: '02',
