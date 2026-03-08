@@ -11,16 +11,19 @@ const leagueGothic = League_Gothic({
 
 const DONATION_LINK = "https://whydonate.com/fundraising/help-helen-study-fashion-in-europe";
 
-
 const COLLECTED_AMOUNT = 339; 
 const TARGET_AMOUNT = 30000;
 const PROGRESS_PERCENTAGE = Math.min((COLLECTED_AMOUNT / TARGET_AMOUNT) * 100, 100);
 
+const NOTE_TEXT = "Important: Please leave your email or IG handle in the donation message so we can send your reward.";
+const NOTE_WORDS = NOTE_TEXT.split(" ");
+
 export default function SupportCampaign() {
+  let delayCounter = 0; 
+
   return (
     <main className="min-h-screen bg-[#050505] text-[#F5E1D9] selection:bg-[#DC2626] selection:text-white pb-32">
       
-
       <section className="relative w-full min-h-[80vh] flex flex-col items-center justify-center pt-32 px-4 md:px-8 text-center overflow-hidden">
         <div className="absolute inset-0 z-0 opacity-20 pointer-events-none">
           <div className="absolute inset-0 bg-gradient-to-b from-transparent via-[#050505]/80 to-[#050505] z-10" />
@@ -51,10 +54,8 @@ export default function SupportCampaign() {
         </motion.div>
       </section>
 
-
       <section className="w-full max-w-[1440px] mx-auto px-4 md:px-8 py-20 relative z-10">
         
-
         <div className="max-w-4xl mx-auto mb-20">
           <div className="flex justify-between font-mono text-sm uppercase tracking-widest mb-4">
             <span>Raised: <span className="text-[#DC2626]">${COLLECTED_AMOUNT.toLocaleString()}</span></span>
@@ -166,8 +167,38 @@ export default function SupportCampaign() {
             </div>
           ))}
         </div>
-      </section>
 
+        <div className="flex flex-wrap justify-center gap-x-2 gap-y-1 mt-16 max-w-3xl mx-auto text-center pointer-events-none">
+          {NOTE_WORDS.map((word, wordIndex) => (
+            <div key={wordIndex} className="flex">
+              {Array.from(word).map((char, charIndex) => {
+                const currentDelay = delayCounter * 0.05;
+                delayCounter++; 
+                return (
+                  <motion.span
+                    key={charIndex}
+                    animate={{
+                      opacity: [0.3, 1, 0.3],
+                      y: [0, -3, 0],
+                      color: ['#F5E1D9', '#DC2626', '#F5E1D9']
+                    }}
+                    transition={{
+                      duration: 1.5,
+                      repeat: Infinity,
+                      repeatDelay: 3, 
+                      delay: currentDelay,
+                      ease: "easeInOut"
+                    }}
+                    className="font-mono text-[10px] md:text-sm uppercase tracking-widest font-bold"
+                  >
+                    {char}
+                  </motion.span>
+                );
+              })}
+            </div>
+          ))}
+        </div>
+      </section>
 
       <div className="fixed bottom-0 left-0 w-full p-4 bg-gradient-to-t from-[#050505] via-[#050505] to-transparent z-[100] md:hidden flex justify-center">
         <a 
