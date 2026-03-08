@@ -9,6 +9,8 @@ import Gallery from "./Components/Gallery";
 import ScrollToTop from "./Components/ScrollToTop";
 import { Analytics } from "@vercel/analytics/next"
 
+
+
 export default function Home() {
   return (
     <div>
