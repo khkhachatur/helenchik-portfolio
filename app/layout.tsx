@@ -23,6 +23,11 @@ export const metadata: Metadata = {
     locale: 'en_US',
     type: 'website',
   },
+  verification: {
+    other: {
+      'facebook-domain-verification': ['9rk05czotq7yvt9555yf41tz6yjh2y'],
+    },
+  },
 };
 
 const geistSans = Geist({
