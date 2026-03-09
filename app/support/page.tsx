@@ -11,7 +11,7 @@ const leagueGothic = League_Gothic({
 
 const DONATION_LINK = "https://whydonate.com/fundraising/help-helen-study-fashion-in-europe";
 
-const COLLECTED_AMOUNT = 462; 
+const COLLECTED_AMOUNT = 487; 
 const TARGET_AMOUNT = 30000;
 const PROGRESS_PERCENTAGE = Math.min((COLLECTED_AMOUNT / TARGET_AMOUNT) * 100, 100);
 
