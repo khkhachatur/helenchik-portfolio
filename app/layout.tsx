@@ -1,7 +1,8 @@
-import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import Script from 'next/script';
+import type { Metadata } from "next";
+import { Geist, Geist_Mono } from "next/font/google";
+import { GoogleAnalytics } from '@next/third-parties/google';
 
 
 export const metadata: Metadata = {
@@ -66,6 +67,7 @@ export default function RootLayout({
           `}
         </Script>
         {children}
+       <GoogleAnalytics gaId="G-TZY42ESPVF" />
       </body>
     </html>
   );
