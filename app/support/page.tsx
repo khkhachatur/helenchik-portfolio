@@ -13,8 +13,8 @@ async function getDonationData() {
     const html = await res.text();
     const $ = cheerio.load(html);
 
-    const raised = $('.inline-block.text-3xl.font-bold').first().text().trim() || '€708';
-    const target = $('.text-sm.text-gray-500').first().text().replace('of', '').trim() || '€30,000';
+    const raised = $('.inline-block.text-3xl.font-bold').first().text().trim() || '$808';
+    const target = $('.text-sm.text-gray-500').first().text().replace('of', '').trim() || '$30,000';
 
     const raisedNum = parseInt(raised.replace(/[^0-9]/g, '')) || 708;
     const targetNum = parseInt(target.replace(/[^0-9]/g, '')) || 30000;
@@ -26,7 +26,7 @@ async function getDonationData() {
     };
   } catch (error) {
     console.error("Scraping error:", error);
-    return { raised: '€708', target: '€30,000', percentage: 2.3 }; 
+    return { raised: '$808', target: '$30,000', percentage: 2.3 }; 
   }
 }
 

@@ -16,6 +16,16 @@ const NOTE_WORDS = NOTE_TEXT.split(" ");
 export default function SupportCampaignClient({ liveData }: { liveData: any }) {
   let delayCounter = 0; 
 
+const trackDonationClick = (buttonLocation: string) => {
+    if (typeof window !== 'undefined' && typeof (window as any).gtag !== 'undefined') {
+      (window as any).gtag('event', 'donate_button_click', {
+        event_category: 'Fundraising',
+        event_label: buttonLocation,
+      });
+      console.log(`GA4 Event Fired: donate_button_click from ${buttonLocation}`);
+    }
+  };
+
   return (
     <main className="min-h-screen bg-[#050505] text-[#F5E1D9] selection:bg-[#DC2626] selection:text-white pb-32">
       <section className="relative w-full min-h-[80vh] flex flex-col items-center justify-center pt-32 px-4 md:px-8 text-center overflow-hidden">
@@ -43,6 +53,24 @@ export default function SupportCampaignClient({ liveData }: { liveData: any }) {
             <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#F5E1D9] to-[#737373]">Of Fashion.</span>
           </h1>
         </motion.div>
+        <div className="w-full overflow-hidden border-y border-[#DC2626] bg-[#DC2626] text-white py-3 my-8 relative z-20">
+          <motion.div
+            animate={{ x: ["0%", "-50%"] }}
+            transition={{ repeat: Infinity, ease: "linear", duration: 15 }}
+            className="flex whitespace-nowrap font-mono text-sm uppercase tracking-widest"
+          >
+            {[...Array(2)].map((_, i) => (
+              <div key={i} className="flex gap-12 pr-12 font-bold">
+                <span>[ +€50 FROM MILAN ]</span>
+                <span>[ +€100 FROM YEREVAN ]</span>
+                <span>[ +€20 FROM LONDON ]</span>
+                <span>[ +€70 ANONYMOUS ]</span>
+                <span>[ +€10 FROM PARIS ]</span>
+                <span>[ +€15 FROM NEW YORK ]</span>
+              </div>
+            ))}
+          </motion.div>
+        </div>
       </section>
 
       <section className="w-full max-w-[1440px] mx-auto px-4 md:px-8 py-20 relative z-10">
@@ -68,8 +96,9 @@ export default function SupportCampaignClient({ liveData }: { liveData: any }) {
             </h2>
             <a 
               href={DONATION_LINK} 
-              target="_blank" 
-              rel="noreferrer"
+  target="_blank" 
+  rel="noreferrer"
+  onClick={() => trackDonationClick('Main Hero Button')}
               className="inline-block w-full text-center bg-[#F5E1D9] text-[#050505] font-mono uppercase tracking-widest font-bold text-sm py-4 hover:bg-[#DC2626] hover:text-white transition-colors duration-300"
             >
               Support on WhyDonate
@@ -102,7 +131,12 @@ export default function SupportCampaignClient({ liveData }: { liveData: any }) {
               <span className="font-mono text-[#DC2626] text-sm uppercase tracking-widest mb-2">{tier.tier}</span>
               <h3 className={`${leagueGothic.className} text-5xl text-[#F5E1D9] mb-6`}>{tier.price}</h3>
               <p className="font-mono text-[11px] opacity-70 uppercase tracking-widest leading-relaxed flex-grow">{tier.reward}</p>
-              <a href={DONATION_LINK} target="_blank" rel="noreferrer" className="mt-8 border border-[#F5E1D9]/30 font-mono text-xs uppercase tracking-widest px-6 py-3 hover:bg-white hover:text-black transition-all">Select Tier</a>
+              <a 
+              href={DONATION_LINK} 
+              target="_blank" 
+              rel="noreferrer" 
+              onClick={() => trackDonationClick(`Tier Button - ${tier.tier}`)}
+              className="mt-8 border border-[#F5E1D9]/30 font-mono text-xs uppercase tracking-widest px-6 py-3 hover:bg-white hover:text-black transition-all">Select Tier</a>
             </div>
           ))}
         </div>
