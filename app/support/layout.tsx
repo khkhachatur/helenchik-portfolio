@@ -1,4 +1,6 @@
 import { Metadata } from 'next';
+import Navbar from '../Components/Navbar';
+import Footer from '../Components/Footer';
 
 
 export const metadata: Metadata = {
@@ -26,5 +28,9 @@ export const metadata: Metadata = {
 };
 
 export default function SupportLayout({ children }: { children: React.ReactNode }) {
-  return <>{children}</>;
+  return <>
+  <Navbar />
+  {children}
+  <Footer />
+  </>;
 }
