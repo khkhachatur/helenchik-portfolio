@@ -1,32 +1,29 @@
-import * as cheerio from 'cheerio';
-import SupportCampaignClient from '../Components/SupportCampaignClient';
+import SupportCampaignClient from "../Components/SupportCampaignClient";
 
 
 async function getDonationData() {
   try {
-    const res = await fetch('https://whydonate.com/fundraising/help-helen-study-fashion-in-europe', {
+    const res = await fetch('https://fundraiser.whydonate.dev/fundraiser/get?slug=help-helen-study-fashion-in-europe&language=en', {
       next: { revalidate: 1800 }, 
     });
     
-    if (!res.ok) throw new Error('Failed to fetch');
+    if (!res.ok) throw new Error('Failed to fetch from API');
     
-    const html = await res.text();
-    const $ = cheerio.load(html);
-
-    const raised = $('.inline-block.text-3xl.font-bold').first().text().trim() || '$808';
-    const target = $('.text-sm.text-gray-500').first().text().replace('of', '').trim() || '$30,000';
-
-    const raisedNum = parseInt(raised.replace(/[^0-9]/g, '')) || 708;
-    const targetNum = parseInt(target.replace(/[^0-9]/g, '')) || 30000;
+    const json = await res.json();
+    
+    const fundraiser = json?.data?.result;
+    
+    const raisedNum = fundraiser?.donation?.amount || 708; 
+    const targetNum = fundraiser?.amount_target || 30000;
 
     return {
-      raised,
-      target,
+      raised: `$${raisedNum.toLocaleString()}`,
+      target: `$${targetNum.toLocaleString()}`,
       percentage: Math.min((raisedNum / targetNum) * 100, 100)
     };
   } catch (error) {
-    console.error("Scraping error:", error);
-    return { raised: '$808', target: '$30,000', percentage: 2.3 }; 
+    console.error("API Fetch error:", error);
+    return { raised: '$708', target: '$30,000', percentage: 2.3 }; 
   }
 }
 
