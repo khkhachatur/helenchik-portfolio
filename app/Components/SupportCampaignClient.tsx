@@ -68,12 +68,9 @@ export default function SupportCampaignClient({ liveData }: { liveData: any }) {
         >
           {[...Array(2)].map((_, i) => (
             <div key={i} className="flex gap-12 pr-12 font-bold">
-              <span>[ +€50 FROM MILAN ]</span>
-              <span>[ +€100 FROM YEREVAN ]</span>
-              <span>[ +€20 FROM LONDON ]</span>
-              <span>[ +€200 ANONYMOUS ]</span>
-              <span>[ +€10 FROM PARIS ]</span>
-              <span>[ +€150 FROM NEW YORK ]</span>
+              {liveData.recentDonors.map((donorText: string, index: number) => (
+                <span key={index}>{donorText}</span>
+              ))}
             </div>
           ))}
         </motion.div>
