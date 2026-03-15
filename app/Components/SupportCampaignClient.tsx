@@ -60,14 +60,14 @@ export default function SupportCampaignClient({ liveData }: { liveData: any }) {
         </motion.div>
       </section>
 
-      <div className="w-full overflow-hidden border-y border-[#DC2626] bg-[#DC2626] text-white py-3 my-8 relative z-20">
+      <div className="w-full overflow-hidden border-y border-[#DC2626] bg-[#DC2626] text-white py-3 my-8 relative z-20 flex">
         <motion.div
           animate={{ x: ["0%", "-50%"] }}
-          transition={{ repeat: Infinity, ease: "linear", duration: 15 }}
-          className="flex whitespace-nowrap font-mono text-sm uppercase tracking-widest"
+          transition={{ repeat: Infinity, ease: "linear", duration: 30 }}
+          className="flex flex-nowrap w-max font-mono text-sm uppercase tracking-widest"
         >
-          {[...Array(2)].map((_, i) => (
-            <div key={i} className="flex gap-12 pr-12 font-bold">
+          {[...Array(6)].map((_, blockIndex) => (
+            <div key={blockIndex} className="flex items-center gap-12 pr-12 font-bold shrink-0">
               {liveData.recentDonors.map((donorText: string, index: number) => (
                 <span key={index}>{donorText}</span>
               ))}

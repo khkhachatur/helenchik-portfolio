@@ -26,7 +26,7 @@ const floatingAnimation = {
   return (
     <main id="home" className="w-full min-h-screen bg-[#050505] flex items-center justify-center overflow-hidden">
       
-      <div className="relative w-full max-w-[1440px] h-screen max-h-[1000px] overflow-hidden bg-[#050505]">
+      <div className="relative w-full max-w-[1440px] h-screen max-h-[850px] overflow-hidden bg-[#050505]">
         
         <motion.div 
           className="absolute inset-0 z-0 origin-center"
@@ -80,7 +80,7 @@ const floatingAnimation = {
         </motion.div>
 
         <motion.div 
-          className="hidden xl:block absolute inset-y-0 left-0 w-[55%] z-30 pointer-events-none"
+          className="hidden xl:block absolute inset-y-0 left-0 w-[50%] z-30 pointer-events-none"
           animate={{ 
             x: isHovered ? -30 : 0,
             filter: isHovered 
@@ -99,7 +99,7 @@ const floatingAnimation = {
         </motion.div>
 
         <motion.div 
-          className="hidden xl:block absolute inset-y-0 right-0 w-[55%] z-30 pointer-events-none"
+          className="hidden xl:block absolute inset-y-0 right-0 w-[50%] z-30 pointer-events-none"
           animate={{ 
             x: isHovered ? 30 : 0,
             filter: isHovered 
@@ -145,9 +145,9 @@ const floatingAnimation = {
           <Image src="/images/right-eye.png" alt="Right eye" fill sizes="320px" className="object-contain" />
         </motion.div>
 
-       <div className="absolute left-1 md:left-8 top-0 bottom-0 py-8 flex items-center justify-center z-50 pointer-events-none">
+      <div className="absolute left-1 md:left-8 top-0 bottom-0 py-8 flex items-center justify-center z-50 pointer-events-none">
           <h1 
-            className={`${leagueGothic.className} text-[#F5E1D9] uppercase whitespace-nowrap text-[4.5rem] min-[400px]:text-[5rem] md:text-[clamp(6rem,16vh,14rem)]`}
+            className={`${leagueGothic.className} text-[#F5E1D9] uppercase whitespace-nowrap text-[4.5rem] min-[400px]:text-[5rem] md:text-[clamp(4.5rem,9vh,9rem)]`}
             style={{ 
               writingMode: 'vertical-rl', 
               transform: 'rotate(180deg)',
@@ -155,6 +155,18 @@ const floatingAnimation = {
             }}
           >
             Portfolio
+          </h1>
+        </div>
+
+        <div className="absolute right-1 md:right-8 top-12 md:top-0 bottom-0 pt-24 pb-8 md:py-8 flex items-center justify-center z-50 pointer-events-none">
+          <h1 
+            className={`${leagueGothic.className} text-[#F5E1D9] uppercase whitespace-nowrap text-[4.5rem] min-[400px]:text-[5rem] md:text-[clamp(4.5rem,9vh,9rem)]`}
+            style={{ 
+              writingMode: 'vertical-rl',
+              letterSpacing: '0.02em',
+            }}
+          >
+            Helen Khachatryan
           </h1>
         </div>
 
