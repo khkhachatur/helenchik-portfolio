@@ -3,6 +3,7 @@
 import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { League_Gothic } from 'next/font/google';
+import { usePathname, useRouter } from 'next/navigation';
 
 const leagueGothic = League_Gothic({
   subsets: ['latin'],
@@ -19,6 +20,8 @@ const navLinks = [
 
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
+  const pathname = usePathname();
+  const router = useRouter();
 
   useEffect(() => {
     if (isOpen) {
@@ -34,11 +37,15 @@ export default function Navbar() {
     setIsOpen(false);
     
     setTimeout(() => {
-      const element = document.querySelector(href);
-      if (element) {
-        element.scrollIntoView({ behavior: 'smooth' });
+      if (pathname !== '/') {
+        router.push(`/${href}`);
+      } else {
+        const element = document.querySelector(href);
+        if (element) {
+          element.scrollIntoView({ behavior: 'smooth' });
+        }
       }
-    }, 500);
+    }, 500); 
   };
 
   return (

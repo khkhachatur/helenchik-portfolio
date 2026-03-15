@@ -235,6 +235,27 @@ export default function SupportCampaignClient({ liveData }: { liveData: any }) {
           Donate Now
         </a>
       </div>
+      {/* Portfolio Bridge Section */}
+      <section className="w-full max-w-[1440px] mx-auto px-4 md:px-8 py-20 relative z-10 border-t border-[#F5E1D9]/10">
+        <div className="flex flex-col md:flex-row items-center justify-between gap-8 bg-[#0A0A0A] p-8 md:p-12 border border-[#F5E1D9]/20 hover:border-[#DC2626]/50 transition-colors duration-500">
+          <div className="md:w-2/3 text-left">
+            <h2 className={`${leagueGothic.className} text-5xl md:text-7xl uppercase tracking-wide text-[#F5E1D9] mb-4`}>
+              The Vision You Are Funding.
+            </h2>
+            <p className="font-mono text-sm opacity-70 uppercase tracking-widest leading-relaxed max-w-2xl">
+              Want to know the artist behind the campaign? Explore My complete archive, unreleased sketches, and Vogue-featured collections to see exactly what you are supporting.
+            </p>
+          </div>
+          <div className="md:w-1/3 w-full flex md:justify-end">
+            <a 
+              href="/" 
+              className="w-full md:w-auto text-center border border-[#DC2626] text-[#DC2626] font-mono uppercase tracking-widest font-bold text-sm px-10 py-5 hover:bg-[#DC2626] hover:text-white transition-all duration-300"
+            >
+              Explore Portfolio
+            </a>
+          </div>
+        </div>
+      </section>
 
     </main>
   );
