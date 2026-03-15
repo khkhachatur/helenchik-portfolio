@@ -166,21 +166,21 @@ export default function SupportCampaignClient({ liveData }: { liveData: any }) {
                 name: "Istituto Marangoni", 
                 location: "Florence, Italy", 
                 offer: "€5,000 Scholarship", 
-                status: "SECURED",
+                status: "ACCEPTED",
                 highlight: true
               },
               { 
                 name: "NABA - Nuova Accademia Di Belle Arti", 
                 location: "Milan / Rome", 
                 offer: "€5,000 Scholarship", 
-                status: "SECURED",
+                status: "ACCEPTED",
                 highlight: true
               },
               { 
                 name: "IED - Istituto Europeo di Design", 
                 location: "Florence, Italy", 
                 offer: "15% Tuition Discount", 
-                status: "SECURED",
+                status: "ACCEPTED",
                 highlight: true
               },
               { 
