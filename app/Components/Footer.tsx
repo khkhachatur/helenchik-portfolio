@@ -12,7 +12,7 @@ export default function Footer() {
     <footer className="w-full bg-[#DC2626] text-[#050505] py-20 md:py-32 px-4 md:px-8 overflow-hidden relative selection:bg-[#050505] selection:text-[#F5E1D9]">
       
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full whitespace-nowrap opacity-10 pointer-events-none flex justify-center">
-        <h2 className={`${leagueGothic.className} text-[20vw] uppercase leading-none`}>
+        <h2 className={`${leagueGothic.className} text-[17vw] uppercase leading-none`}>
           HELEN KHACHATRYAN
         </h2>
       </div>
