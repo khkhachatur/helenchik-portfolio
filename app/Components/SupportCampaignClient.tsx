@@ -148,6 +148,86 @@ export default function SupportCampaignClient({ liveData }: { liveData: any }) {
 
         </div>
       </section>
+      {/* Admissions & Scholarships Ledger */}
+      <section className="w-full max-w-[1440px] mx-auto px-4 md:px-8 py-20 relative z-10 border-t border-[#F5E1D9]/10">
+        <div className="max-w-4xl mx-auto">
+          <div className="mb-12">
+            <h2 className={`${leagueGothic.className} text-5xl md:text-6xl uppercase tracking-wide text-[#F5E1D9]`}>
+              Proof of Potential
+            </h2>
+            <p className="font-mono text-sm opacity-50 uppercase tracking-widest mt-2">
+              Top academies have already verified Helen's talent with official scholarships.
+            </p>
+          </div>
+
+          <div className="flex flex-col border-t border-[#F5E1D9]/20">
+            {[
+              { 
+                name: "Istituto Marangoni", 
+                location: "Florence, Italy", 
+                offer: "€5,000 Scholarship", 
+                status: "SECURED",
+                highlight: true
+              },
+              { 
+                name: "NABA - Nuova Accademia Di Belle Arti", 
+                location: "Milan / Rome", 
+                offer: "€5,000 Scholarship", 
+                status: "SECURED",
+                highlight: true
+              },
+              { 
+                name: "IED - Istituto Europeo di Design", 
+                location: "Florence, Italy", 
+                offer: "15% Tuition Discount", 
+                status: "SECURED",
+                highlight: true
+              },
+              { 
+                name: "Accademia Italiana", 
+                location: "Florence / Rome", 
+                offer: "Awaiting Decision", 
+                status: "MARCH 20",
+                highlight: false
+              }
+            ].map((academy, i) => (
+              <motion.div 
+                key={i}
+                initial={{ opacity: 0, x: -20 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.5, delay: i * 0.1 }}
+                whileHover={{ x: 10, backgroundColor: "#0A0A0A" }}
+                className="group flex flex-col md:flex-row justify-between items-start md:items-center py-6 md:py-8 border-b border-[#F5E1D9]/10 cursor-default transition-colors duration-300 px-4 -mx-4"
+              >
+                <div className="flex flex-col md:w-1/2 mb-4 md:mb-0">
+                  <span className="font-mono text-[10px] text-[#DC2626] uppercase tracking-widest mb-2">
+                    [ {academy.location} ]
+                  </span>
+                  <h3 className={`${leagueGothic.className} text-3xl md:text-5xl text-[#F5E1D9] group-hover:text-white transition-colors`}>
+                    {academy.name}
+                  </h3>
+                </div>
+                
+                <div className="flex flex-col md:w-1/4 md:items-end text-left md:text-right mb-4 md:mb-0">
+                  <span className="font-mono text-[10px] opacity-50 uppercase tracking-widest mb-1">
+                    Award
+                  </span>
+                  <span className={`font-mono text-lg md:text-xl uppercase tracking-widest ${academy.highlight ? 'text-[#DC2626] font-bold' : 'text-[#F5E1D9] opacity-70'}`}>
+                    {academy.offer}
+                  </span>
+                </div>
+
+                <div className="flex flex-col md:w-1/4 items-start md:items-end">
+                  <span className={`border px-3 py-1 font-mono text-[10px] uppercase tracking-widest ${academy.highlight ? 'border-[#DC2626] text-[#DC2626]' : 'border-[#F5E1D9]/30 text-[#F5E1D9]/50'}`}>
+                    Status: {academy.status}
+                  </span>
+                </div>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+      </section>
 
       <section className="w-full max-w-[1440px] mx-auto px-4 md:px-8 py-20 relative z-10 border-t border-[#F5E1D9]/10">
         <div className="text-center mb-16">

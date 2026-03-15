@@ -230,6 +230,7 @@ export const projectDetails = {
       { src: '/images/tumo/tumo-upcycle-runway-3.jpg', alt: 'Runway Look 3', fit: 'cover' as const },
       { src: '/images/tumo/tumo-upcycle-runway-4.jpg', alt: 'Runway Look 4', fit: 'cover' as const },
       { src: '/images/tumo/tumo-upcycle-runway-5.jpg', alt: 'Runway Look 5', fit: 'cover' as const },
+      { src: '/images/tumo/tumo-upcycle-runway-6.jpg', alt: 'Runway Look 6', fit: 'cover' as const },
     ]
   }
 };
