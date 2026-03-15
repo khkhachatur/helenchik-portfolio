@@ -160,7 +160,7 @@ const floatingAnimation = {
 
         <div className="absolute right-1 md:right-8 top-12 md:top-0 bottom-0 pt-24 pb-8 md:py-8 flex items-center justify-center z-50 pointer-events-none">
           <h1 
-            className={`${leagueGothic.className} text-[#F5E1D9] uppercase whitespace-nowrap text-[4.5rem] min-[400px]:text-[5rem] md:text-[clamp(6rem,16vh,14rem)]`}
+            className={`${leagueGothic.className} text-[#F5E1D9] uppercase whitespace-nowrap text-[4.5rem] min-[400px]:text-[5rem] md:text-[clamp(6rem,9vh,14rem)]`}
             style={{ 
               writingMode: 'vertical-rl',
               letterSpacing: '0.02em',

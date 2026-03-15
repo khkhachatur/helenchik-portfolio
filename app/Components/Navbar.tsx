@@ -48,27 +48,46 @@ export default function Navbar() {
     }, 500); 
   };
 
-  return (
+ return (
     <>
-      <a 
-        href={pathname === '/support' ? '/' : '/support'}
-        className="fixed top-6 left-6 md:top-10 md:left-10 z-[80] group flex items-center gap-3 mix-blend-difference"
-      >
-        <div className="text-[#DC2626] hover:text-white hover:bg-[#DC2626] transition-all duration-300 font-mono uppercase tracking-widest text-xs md:text-sm bg-black/20 px-4 py-2 backdrop-blur-md border border-[#DC2626]/50 shadow-[0_0_15px_rgba(220,38,38,0.2)]">
-          {pathname === '/support' ? '[ BACK TO PORTFOLIO ]' : '[ HELP HELEN STUDY IN EUROPE ]'}
+
+      <div className="fixed top-4 md:top-10 left-0 right-0 w-full z-[80] pointer-events-none flex justify-center">
+        <div className="w-full max-w-[1440px] px-4 md:px-10 flex justify-between items-start gap-2">
+          
+          <a 
+            href={pathname === '/support' ? '/' : '/support'}
+            className="pointer-events-auto group flex items-center mix-blend-difference shrink-0"
+          >
+            <div className="text-[#DC2626] hover:text-white hover:bg-[#DC2626] transition-all duration-300 font-mono uppercase tracking-widest text-[10px] sm:text-xs md:text-sm bg-black/20 px-3 py-2 md:px-4 backdrop-blur-md border border-[#DC2626]/50 shadow-[0_0_15px_rgba(220,38,38,0.2)] whitespace-nowrap">
+              {pathname === '/support' ? (
+                <>
+                  <span className="hidden sm:inline">[ BACK TO PORTFOLIO ]</span>
+                  <span className="sm:hidden">[ BACK ]</span>
+                </>
+              ) : (
+                <>
+                  <span className="hidden sm:inline">[ HELP HELEN STUDY IN EUROPE ]</span>
+                  <span className="sm:hidden">[ SUPPORT ]</span>
+                </>
+              )}
+            </div>
+          </a>
+
+          <button 
+            onClick={() => setIsOpen(true)}
+            className="pointer-events-auto group flex items-center gap-3 mix-blend-difference shrink-0"
+          >
+            <span className="font-mono text-[#F5E1D9] text-xs uppercase tracking-widest opacity-0 group-hover:opacity-100 transition-opacity duration-300 hidden md:block">
+              Explore
+            </span>
+            <div className="text-[#F5E1D9] hover:text-[#DC2626] transition-colors font-mono uppercase tracking-widest text-[10px] sm:text-xs md:text-sm bg-black/20 px-3 py-2 md:px-4 backdrop-blur-md border border-[#F5E1D9]/20 whitespace-nowrap">
+              [ Menu ]
+            </div>
+          </button>
+
         </div>
-      </a>
-      <button 
-        onClick={() => setIsOpen(true)}
-        className="fixed top-6 right-6 md:top-10 md:right-10 z-[80] group flex items-center gap-3 mix-blend-difference"
-      >
-        <span className="font-mono text-[#F5E1D9] text-xs uppercase tracking-widest opacity-0 group-hover:opacity-100 transition-opacity duration-300 hidden md:block">
-          Explore
-        </span>
-        <div className="text-[#F5E1D9] hover:text-[#DC2626] transition-colors font-mono uppercase tracking-widest text-sm bg-black/20 px-4 py-2 backdrop-blur-md border border-[#F5E1D9]/20">
-          [ Menu ]
-        </div>
-      </button>
+      </div>
+
 
       <AnimatePresence>
         {isOpen && (
