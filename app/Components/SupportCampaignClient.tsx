@@ -77,14 +77,14 @@ export default function SupportCampaignClient({ liveData }: { liveData: any }) {
       </div>
 
       <section className="w-full max-w-[1440px] mx-auto px-4 md:px-8 py-20 relative z-10">
-        
+
         <div className="max-w-4xl mx-auto mb-20">
           <div className="flex justify-between font-mono text-sm uppercase tracking-widest mb-4">
             <span>Raised: <span className="text-[#DC2626]">{liveData.raised}</span></span>
             <span className="opacity-50">Goal: {liveData.target}</span>
           </div>
           <div className="w-full h-2 bg-[#F5E1D9]/10 rounded-full overflow-hidden">
-            <motion.div 
+            <motion.div
               initial={{ width: 0 }}
               whileInView={{ width: `${liveData.percentage}%` }}
               transition={{ duration: 1.5, ease: "easeOut" }}
@@ -93,6 +93,51 @@ export default function SupportCampaignClient({ liveData }: { liveData: any }) {
             />
           </div>
         </div>
+
+        {liveData.topDonors && liveData.topDonors.length > 0 && (
+          <div className="max-w-4xl mx-auto mb-20">
+            <div className="mb-8">
+              <h2 className={`${leagueGothic.className} text-5xl md:text-6xl uppercase tracking-wide text-[#F5E1D9]`}>
+                Top Supporters
+              </h2>
+              <p className="font-mono text-sm opacity-50 uppercase tracking-widest mt-2">
+                The people making this dream possible
+              </p>
+            </div>
+
+            <div className="flex flex-col border-t border-[#F5E1D9]/20">
+              {liveData.topDonors.map((donor: any, i: number) => (
+                <motion.div
+                  key={i}
+                  initial={{ opacity: 0, x: -20 }}
+                  whileInView={{ opacity: 1, x: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.4, delay: i * 0.06 }}
+                  className="group flex items-center justify-between py-4 md:py-5 border-b border-[#F5E1D9]/10 px-4 -mx-4 hover:bg-[#0A0A0A] transition-colors duration-300"
+                >
+                  <div className="flex items-center gap-4">
+                    <span className="font-mono text-[#DC2626] text-xs opacity-50 w-6 text-right">
+                      {String(i + 1).padStart(2, '0')}
+                    </span>
+                    <div className="flex flex-col">
+                      <span className={`${leagueGothic.className} text-2xl md:text-3xl uppercase text-[#F5E1D9] group-hover:text-white transition-colors`}>
+                        {donor.name}
+                      </span>
+                      {donor.message && (
+                        <span className="font-mono text-[10px] opacity-40 uppercase tracking-widest mt-1 max-w-[300px] truncate">
+                          &quot;{donor.message}&quot;
+                        </span>
+                      )}
+                    </div>
+                  </div>
+                  <span className="font-mono text-lg md:text-xl text-[#DC2626] font-bold tracking-wider">
+                    {donor.symbol}{donor.amount.toLocaleString()}
+                  </span>
+                </motion.div>
+              ))}
+            </div>
+          </div>
+        )}
 
         <div className="flex flex-col md:flex-row gap-12 md:gap-24">
           <div className="md:w-1/3">
