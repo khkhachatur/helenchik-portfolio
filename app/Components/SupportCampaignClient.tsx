@@ -26,7 +26,7 @@ const SPEED = 0.3;
 
 function initBubbles(donors: any[], width: number, height: number, mobile: boolean): BubbleState[] {
   if (!donors.length || !width) return [];
-  const maxAmount = Math.max(...donors.map((d: any) => d.amount));
+  const maxAmount = Math.max(...donors.map((d: any) => d.usdValue ?? d.amount));
   const minSize = mobile ? MIN_SIZE_MOBILE : MIN_SIZE_DESKTOP;
   const maxSize = mobile ? MAX_SIZE_MOBILE : MAX_SIZE_DESKTOP;
 
@@ -34,7 +34,7 @@ function initBubbles(donors: any[], width: number, height: number, mobile: boole
   const padding = 16;
 
   for (const d of donors) {
-    const ratio = d.amount / maxAmount;
+    const ratio = (d.usdValue ?? d.amount) / maxAmount;
     const size = minSize + (maxSize - minSize) * Math.sqrt(ratio);
     const r = size / 2;
 
