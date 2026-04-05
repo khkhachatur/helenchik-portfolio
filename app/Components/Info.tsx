@@ -1,12 +1,7 @@
 'use client';
 
-import { League_Gothic } from 'next/font/google';
 import { education, fashionExperience, handsOnExperience, languages, skills, tools } from '../lib/data';
-
-const leagueGothic = League_Gothic({
-  subsets: ['latin'],
-  display: 'swap',
-});
+import { leagueGothic } from '../lib/fonts';
 
 
 

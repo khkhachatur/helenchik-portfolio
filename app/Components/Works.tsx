@@ -3,14 +3,9 @@
 import { useState } from 'react';
 import Image from 'next/image';
 import { motion } from 'framer-motion';
-import { League_Gothic } from 'next/font/google';
 import Link from 'next/link';
 import { projects } from '../lib/data';
-
-const leagueGothic = League_Gothic({
-  subsets: ['latin'],
-  display: 'swap',
-});
+import { leagueGothic } from '../lib/fonts';
 
 export default function Works() {
   const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
@@ -87,7 +82,7 @@ export default function Works() {
                       fill 
                       className="object-cover opacity-90"
                       sizes="320px"
-                      quality={100}
+                      quality={85}
                     />
                     <div className="absolute inset-0 bg-red-900/10 mix-blend-multiply" />
                   </div>

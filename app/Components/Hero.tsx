@@ -3,12 +3,7 @@
 import Image from 'next/image';
 import { motion } from 'framer-motion';
 import { useState } from 'react';
-import { League_Gothic } from 'next/font/google';
-
-const leagueGothic = League_Gothic({
-  subsets: ['latin'],
-  display: 'swap',
-});
+import { leagueGothic } from '../lib/fonts';
 
 export default function Hero() {
   const [isHovered, setIsHovered] = useState(false);
@@ -34,7 +29,7 @@ const floatingAnimation = {
           transition={{ duration: 1.5, ease: "easeOut" }}
         >
           <Image 
-            src="/images/bg.png" 
+            src="/images/bg.jpg"
             alt="Red Background" 
             fill
             priority

@@ -2,13 +2,8 @@
 
 import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { League_Gothic } from 'next/font/google';
 import { usePathname, useRouter } from 'next/navigation';
-
-const leagueGothic = League_Gothic({
-  subsets: ['latin'],
-  display: 'swap',
-});
+import { leagueGothic } from '../lib/fonts';
 
 const navLinks = [
   { title: 'Home', href: '#home' },

@@ -12,13 +12,8 @@ import {
   useMotionValueEvent,
   MotionValue
 } from 'framer-motion';
-import { League_Gothic } from 'next/font/google';
 import { galleryItems } from '../lib/data';
-
-const leagueGothic = League_Gothic({
-  subsets: ['latin'],
-  display: 'swap',
-});
+import { leagueGothic } from '../lib/fonts';
 
 const CARD_W = 300;
 const GAP_X = 100;
@@ -89,7 +84,7 @@ const FlippableCard = ({
             src={item.src}
             alt={item.title}
             fill
-            quality={100}
+            quality={85}
             className="object-cover transition-transform duration-700 ease-out lg:group-hover:scale-105 opacity-100 lg:opacity-80 lg:group-hover:opacity-100 pointer-events-none select-none"
           />
           <div className="absolute inset-0 bg-gradient-to-t from-[#050505]/90 via-transparent to-transparent opacity-100 lg:opacity-0 lg:group-hover:opacity-100 transition-opacity duration-500 flex flex-col justify-end p-6 pointer-events-none">
@@ -134,16 +129,20 @@ const FlippableCard = ({
           </div>
 
           <div className="w-full h-6 opacity-20 flex gap-1 justify-center items-end">
-            {[...Array(20)].map((_, i) => (
-              <div 
-                key={i} 
-                className="bg-[#F5E1D9]" 
-                style={{ 
-                  width: Math.random() * 3 + 1 + 'px', 
-                  height: Math.random() * 15 + 10 + 'px' 
-                }}
-              />
-            ))}
+            {[...Array(20)].map((_, i) => {
+              const seed = ((i * 7 + 3) % 20) / 20;
+              const seed2 = ((i * 13 + 7) % 20) / 20;
+              return (
+                <div
+                  key={i}
+                  className="bg-[#F5E1D9]"
+                  style={{
+                    width: seed * 3 + 1 + 'px',
+                    height: seed2 * 15 + 10 + 'px'
+                  }}
+                />
+              );
+            })}
           </div>
         </div>
 
