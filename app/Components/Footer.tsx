@@ -1,11 +1,6 @@
 'use client';
 
-import { League_Gothic } from 'next/font/google';
-
-const leagueGothic = League_Gothic({
-  subsets: ['latin'],
-  display: 'swap',
-});
+import { leagueGothic } from '../lib/fonts';
 
 export default function Footer() {
   return (

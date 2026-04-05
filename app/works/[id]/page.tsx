@@ -2,17 +2,11 @@
 
 import Link from 'next/link';
 import { motion } from 'framer-motion';
-import { League_Gothic } from 'next/font/google';
 import { notFound } from 'next/navigation';
 import { use } from 'react';
 import { projectDetails } from '../../lib/data';
 import InfiniteSlider from '@/app/Components/InfiniteSlider';
-
-
-const leagueGothic = League_Gothic({
-  subsets: ['latin'],
-  display: 'swap',
-});
+import { leagueGothic } from '../../lib/fonts';
 
 export default function ProjectDetail({ params }: { params: Promise<{ id: string }> }) {
   const { id } = use(params);

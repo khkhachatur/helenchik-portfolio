@@ -41,8 +41,7 @@ const InfiniteSlider = ({
                 src={img.src}
                 alt={img.alt}
                 fill
-                quality={100}
-                unoptimized
+                sizes="(max-width: 768px) 200px, 300px"
                 className={`hide-in-mask ${
                   img.fit === 'contain' ? 'object-contain p-4 drop-shadow-2xl' : 'object-cover'
                 }`}

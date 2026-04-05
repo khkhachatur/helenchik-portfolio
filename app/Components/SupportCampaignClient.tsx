@@ -1,13 +1,8 @@
 'use client';
 
 import { motion } from 'framer-motion';
-import { League_Gothic } from 'next/font/google';
 import Image from 'next/image';
-
-const leagueGothic = League_Gothic({
-  subsets: ['latin'],
-  display: 'swap',
-});
+import { leagueGothic } from '../lib/fonts';
 
 const DONATION_LINK = "https://whydonate.com/fundraising/help-helen-study-fashion-in-europe";
 
