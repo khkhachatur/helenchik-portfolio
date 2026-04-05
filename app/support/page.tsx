@@ -65,11 +65,12 @@ async function getCampaignData() {
       }))
       .sort((a, b) => b.usdValue - a.usdValue)
       .slice(0, 10)
-      .map(({ name, amount, symbol, message }) => ({
+      .map(({ name, amount, symbol, message, usdValue }) => ({
         name,
         amount: Math.round(amount),
         symbol,
         message,
+        usdValue: Math.round(usdValue),
       }));
 
     return {
