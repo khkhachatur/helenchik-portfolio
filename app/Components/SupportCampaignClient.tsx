@@ -3,11 +3,231 @@
 import { motion } from 'framer-motion';
 import Image from 'next/image';
 import { leagueGothic } from '../lib/fonts';
+import { useMemo, useState, useEffect, useRef, useCallback } from 'react';
+
+interface BubbleState {
+  x: number;
+  y: number;
+  vx: number;
+  vy: number;
+  size: number;
+  name: string;
+  amount: number;
+  symbol: string;
+  message: string;
+}
+
+const MIN_SIZE_DESKTOP = 66;
+const MAX_SIZE_DESKTOP = 180;
+const MIN_SIZE_MOBILE = 58;
+const MAX_SIZE_MOBILE = 132;
+const CONTAINER_HEIGHT = 500;
+const SPEED = 0.3;
+
+function initBubbles(donors: any[], width: number, height: number, mobile: boolean): BubbleState[] {
+  if (!donors.length || !width) return [];
+  const maxAmount = Math.max(...donors.map((d: any) => d.amount));
+  const minSize = mobile ? MIN_SIZE_MOBILE : MIN_SIZE_DESKTOP;
+  const maxSize = mobile ? MAX_SIZE_MOBILE : MAX_SIZE_DESKTOP;
+
+  const bubbles: BubbleState[] = [];
+  const padding = 16;
+
+  for (const d of donors) {
+    const ratio = d.amount / maxAmount;
+    const size = minSize + (maxSize - minSize) * Math.sqrt(ratio);
+    const r = size / 2;
+
+    let x = r + Math.random() * (width - size);
+    let y = r + Math.random() * (height - size);
+
+    for (let attempt = 0; attempt < 200; attempt++) {
+      x = r + Math.random() * (width - size);
+      y = r + Math.random() * (height - size);
+      let ok = true;
+      for (const b of bubbles) {
+        const dist = Math.sqrt((x - b.x) ** 2 + (y - b.y) ** 2);
+        if (dist < r + b.size / 2 + padding) { ok = false; break; }
+      }
+      if (ok) break;
+    }
+
+    const angle = Math.random() * Math.PI * 2;
+    const speed = SPEED * (0.6 + Math.random() * 0.8);
+    bubbles.push({
+      x, y,
+      vx: Math.cos(angle) * speed,
+      vy: Math.sin(angle) * speed,
+      size,
+      name: d.name || 'Anonymous',
+      amount: Math.round(d.amount),
+      symbol: d.symbol || '$',
+      message: d.message || '',
+    });
+  }
+  return bubbles;
+}
 
 const DONATION_LINK = "https://whydonate.com/fundraising/help-helen-study-fashion-in-europe";
 
 const NOTE_TEXT = "Important: Please leave your email or IG handle in the donation message so we can send your reward.";
 const NOTE_WORDS = NOTE_TEXT.split(" ");
+
+function BubbleCloud({ donors }: { donors: any[] }) {
+  const containerRef = useRef<HTMLDivElement>(null);
+  const bubblesRef = useRef<BubbleState[]>([]);
+  const [positions, setPositions] = useState<BubbleState[]>([]);
+  const [containerWidth, setContainerWidth] = useState(0);
+  const [isMobile, setIsMobile] = useState(false);
+  const rafRef = useRef<number>(0);
+  const timeRef = useRef(0);
+
+  const maxSize = isMobile ? MAX_SIZE_MOBILE : MAX_SIZE_DESKTOP;
+  const height = CONTAINER_HEIGHT;
+
+  useEffect(() => {
+    const update = () => {
+      const mobile = window.innerWidth < 640;
+      setIsMobile(mobile);
+      const w = Math.min(window.innerWidth - 32, 900);
+      setContainerWidth(w);
+    };
+    update();
+    window.addEventListener('resize', update);
+    return () => window.removeEventListener('resize', update);
+  }, []);
+
+  useEffect(() => {
+    if (!containerWidth) return;
+    bubblesRef.current = initBubbles(donors, containerWidth, height, isMobile);
+    setPositions([...bubblesRef.current]);
+  }, [donors, containerWidth, height, isMobile]);
+
+  const tick = useCallback(() => {
+    const bs = bubblesRef.current;
+    const w = containerWidth;
+    const h = height;
+    if (!bs.length || !w) return;
+
+    for (const b of bs) {
+      b.x += b.vx;
+      b.y += b.vy;
+
+      const r = b.size / 2;
+      const inset = 20; // room for shadow glow
+      if (b.x - r <= inset) { b.x = r + inset; b.vx = Math.abs(b.vx); }
+      if (b.x + r >= w - inset) { b.x = w - r - inset; b.vx = -Math.abs(b.vx); }
+      if (b.y - r <= inset) { b.y = r + inset; b.vy = Math.abs(b.vy); }
+      if (b.y + r >= h - inset) { b.y = h - r - inset; b.vy = -Math.abs(b.vy); }
+    }
+
+    // Bubble-to-bubble collision
+    for (let i = 0; i < bs.length; i++) {
+      for (let j = i + 1; j < bs.length; j++) {
+        const a = bs[i], b = bs[j];
+        const dx = b.x - a.x;
+        const dy = b.y - a.y;
+        const dist = Math.sqrt(dx * dx + dy * dy);
+        const minDist = (a.size + b.size) / 2 + 8;
+        if (dist < minDist && dist > 0) {
+          const nx = dx / dist;
+          const ny = dy / dist;
+          const overlap = minDist - dist;
+          a.x -= nx * overlap / 2;
+          a.y -= ny * overlap / 2;
+          b.x += nx * overlap / 2;
+          b.y += ny * overlap / 2;
+
+          const dvx = a.vx - b.vx;
+          const dvy = a.vy - b.vy;
+          const dot = dvx * nx + dvy * ny;
+          if (dot > 0) {
+            a.vx -= dot * nx * 0.5;
+            a.vy -= dot * ny * 0.5;
+            b.vx += dot * nx * 0.5;
+            b.vy += dot * ny * 0.5;
+          }
+        }
+      }
+    }
+
+    setPositions(bs.map(b => ({ ...b })));
+  }, [containerWidth, height]);
+
+  useEffect(() => {
+    let running = true;
+    const loop = () => {
+      if (!running) return;
+      tick();
+      rafRef.current = requestAnimationFrame(loop);
+    };
+    rafRef.current = requestAnimationFrame(loop);
+    return () => { running = false; cancelAnimationFrame(rafRef.current); };
+  }, [tick]);
+
+  if (!containerWidth || !positions.length) return null;
+
+  // Shadow pulse uses a CSS animation since it's purely visual
+  const glowStyle = `
+    @keyframes glow-pulse {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.7; }
+    }
+  `;
+
+  return (
+    <div className="max-w-4xl mx-auto mb-20">
+      <style>{glowStyle}</style>
+      <div className="mb-10">
+        <h2 className={`${leagueGothic.className} text-5xl md:text-6xl uppercase tracking-wide text-[#F5E1D9]`}>
+          Top Supporters
+        </h2>
+        <p className="font-mono text-sm opacity-50 uppercase tracking-widest mt-2">
+          Climb the ranks — every donation moves you up
+        </p>
+      </div>
+
+      <div ref={containerRef} className="relative w-full" style={{ height }}>
+        {positions.map((bubble, i) => {
+          const sizeRatio = bubble.size / maxSize;
+          const shadowBlur = Math.round(12 + sizeRatio * 28);
+          const shadowSpread = Math.round(2 + sizeRatio * 8);
+          const shadowAlpha = 0.08 + sizeRatio * 0.18;
+
+          return (
+            <div
+              key={i}
+              className="absolute rounded-full border border-[#F5E1D9]/25 bg-[#0A0A0A]/85 flex flex-col items-center justify-center cursor-default hover:border-[#DC2626] transition-[border-color] duration-300"
+              style={{
+                width: bubble.size,
+                height: bubble.size,
+                transform: `translate(${bubble.x - bubble.size / 2}px, ${bubble.y - bubble.size / 2}px)`,
+                willChange: 'transform',
+                boxShadow: `0 0 ${shadowBlur}px ${shadowSpread}px rgba(220,38,38,${shadowAlpha.toFixed(2)})`,
+                animation: `glow-pulse ${3 + (1 - sizeRatio) * 2}s ease-in-out infinite`,
+              }}
+            >
+              <span className={`${leagueGothic.className} uppercase text-[#F5E1D9] leading-none text-center px-2`}
+                style={{ fontSize: Math.max(bubble.size * 0.14, 10) }}>
+                {bubble.name}
+              </span>
+              {bubble.message && (
+                <span className="font-mono opacity-40 uppercase tracking-widest text-center px-2 mt-0.5 truncate max-w-full"
+                  style={{ fontSize: Math.max(bubble.size * 0.07, 6) }}>
+                  &quot;{bubble.message}&quot;
+                </span>
+              )}
+              <span className="font-mono text-[#DC2626] font-bold mt-1"
+                style={{ fontSize: Math.max(bubble.size * 0.12, 9) }}>
+                {bubble.symbol}{bubble.amount.toLocaleString()}
+              </span>
+            </div>
+          );
+        })}
+      </div>
+    </div>
+  );
+}
 
 export default function SupportCampaignClient({ liveData }: { liveData: any }) {
   let delayCounter = 0; 
@@ -90,48 +310,7 @@ export default function SupportCampaignClient({ liveData }: { liveData: any }) {
         </div>
 
         {liveData.topDonors && liveData.topDonors.length > 0 && (
-          <div className="max-w-4xl mx-auto mb-20">
-            <div className="mb-8">
-              <h2 className={`${leagueGothic.className} text-5xl md:text-6xl uppercase tracking-wide text-[#F5E1D9]`}>
-                Top Supporters
-              </h2>
-              <p className="font-mono text-sm opacity-50 uppercase tracking-widest mt-2">
-                The people making this dream possible
-              </p>
-            </div>
-
-            <div className="flex flex-col border-t border-[#F5E1D9]/20">
-              {liveData.topDonors.map((donor: any, i: number) => (
-                <motion.div
-                  key={i}
-                  initial={{ opacity: 0, x: -20 }}
-                  whileInView={{ opacity: 1, x: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ duration: 0.4, delay: i * 0.06 }}
-                  className="group flex items-center justify-between py-4 md:py-5 border-b border-[#F5E1D9]/10 px-4 -mx-4 hover:bg-[#0A0A0A] transition-colors duration-300"
-                >
-                  <div className="flex items-center gap-4">
-                    <span className="font-mono text-[#DC2626] text-xs opacity-50 w-6 text-right">
-                      {String(i + 1).padStart(2, '0')}
-                    </span>
-                    <div className="flex flex-col">
-                      <span className={`${leagueGothic.className} text-2xl md:text-3xl uppercase text-[#F5E1D9] group-hover:text-white transition-colors`}>
-                        {donor.name}
-                      </span>
-                      {donor.message && (
-                        <span className="font-mono text-[10px] opacity-40 uppercase tracking-widest mt-1 max-w-[300px] truncate">
-                          &quot;{donor.message}&quot;
-                        </span>
-                      )}
-                    </div>
-                  </div>
-                  <span className="font-mono text-lg md:text-xl text-[#DC2626] font-bold tracking-wider">
-                    {donor.symbol}{donor.amount.toLocaleString()}
-                  </span>
-                </motion.div>
-              ))}
-            </div>
-          </div>
+          <BubbleCloud donors={liveData.topDonors} />
         )}
 
         <div className="flex flex-col md:flex-row gap-12 md:gap-24">
@@ -224,11 +403,11 @@ export default function SupportCampaignClient({ liveData }: { liveData: any }) {
                 highlight: true
               },
               { 
-                name: "Accademia Italiana", 
-                location: "Florence / Rome", 
-                offer: "Awaiting Decision", 
-                status: "MARCH 20",
-                highlight: false
+                name: "Accademia Italiana",
+                location: "Florence / Rome",
+                offer: "50% Scholarship",
+                status: "ACCEPTED",
+                highlight: true
               }
             ].map((academy, i) => (
               <motion.div 
