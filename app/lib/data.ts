@@ -321,9 +321,18 @@ export const certificates = [
     type: 'article', 
     image: '/pdfs/Vogue-Italia.jpg' 
   },
-  { 
-    id: 2, 
-    title: 'Fashion Scout Armenia: Polimoda Prize', 
+  {
+    id: 5,
+    title: '"IMPRISONMENT" — Debut Collection',
+    issuer: 'Behance · Elen Khachatryan',
+    year: '2025',
+    link: 'https://www.behance.net/gallery/243701493/IMPRISONMENT-debut-collection-lelen-by-helen',
+    type: 'article',
+    image: '/pdfs/behance.jpeg'
+  },
+  {
+    id: 2,
+    title: 'Fashion Scout Armenia: Polimoda Prize',
     issuer: 'Yerevan Fashion Week & Fashion Scout', 
     year: '2025',
     link: '/pdfs/POLIMODA-PRIZE.pdf', 
