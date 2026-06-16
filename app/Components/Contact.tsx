@@ -5,11 +5,92 @@ import Image from 'next/image';
 import { certificates } from '../lib/data';
 import { leagueGothic } from '../lib/fonts';
 
+type Certificate = (typeof certificates)[number];
+
+function CertCard({ cert, index }: { cert: Certificate; index: number }) {
+  return (
+    <motion.a
+      href={cert.link}
+      target="_blank"
+      rel="noopener noreferrer"
+      initial={{ opacity: 0, y: 30 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true }}
+      transition={{ duration: 0.6, delay: index * 0.1 }}
+      className="group snap-start flex-shrink-0 w-[75vw] sm:w-[360px] md:w-[440px] block relative aspect-[4/3] bg-[#0A0A0A] border border-[#F5E1D9]/10 overflow-hidden cursor-pointer"
+    >
+      <Image
+        src={cert.image}
+        alt={cert.title}
+        fill
+        className="object-cover opacity-50 group-hover:opacity-30 transition-opacity duration-500 grayscale group-hover:grayscale-0 mix-blend-luminosity"
+      />
+
+      <div className="absolute inset-0 p-3 md:p-6 flex flex-col justify-between z-10">
+        <div className="flex justify-between items-start">
+          <span className="font-mono text-[9px] md:text-xs opacity-70 uppercase border border-[#F5E1D9]/20 px-1.5 md:px-2 py-0.5 md:py-1">
+            {cert.year}
+          </span>
+
+          {cert.type === 'pdf' ? (
+            <svg viewBox="0 0 24 24" fill="none" stroke="#F5E1D9" strokeWidth="1.5" className="w-4 h-4 md:w-6 md:h-6 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+              <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2-2V8z"></path>
+              <polyline points="14 2 14 8 20 8"></polyline>
+              <line x1="12" y1="18" x2="12" y2="12"></line>
+              <line x1="9" y1="15" x2="15" y2="15"></line>
+            </svg>
+          ) : (
+            <svg viewBox="0 0 24 24" fill="none" stroke="#F5E1D9" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" className="w-4 h-4 md:w-6 md:h-6 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+              <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
+              <polyline points="15 3 21 3 21 9"></polyline>
+              <line x1="10" y1="14" x2="21" y2="3"></line>
+            </svg>
+          )}
+        </div>
+
+        <div>
+          <h3 className={`${leagueGothic.className} text-2xl md:text-4xl uppercase tracking-wide leading-none md:leading-tight group-hover:text-[#DC2626] transition-colors`}>
+            {cert.title}
+          </h3>
+          <p className="font-mono text-[9px] md:text-sm opacity-70 mt-1 md:mt-2 uppercase leading-tight">
+            {cert.issuer}
+          </p>
+        </div>
+      </div>
+
+      <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-500 bg-black/40 backdrop-blur-sm z-0">
+        <span className="font-mono text-[10px] md:text-sm tracking-widest uppercase border-b border-[#DC2626] text-[#F5E1D9] pb-1">
+          {cert.type === 'pdf' ? 'View PDF' : 'Read Article'}
+        </span>
+      </div>
+    </motion.a>
+  );
+}
+
+function CertRow({ label, items }: { label: string; items: Certificate[] }) {
+  if (items.length === 0) return null;
+  return (
+    <div>
+      <p className="font-mono opacity-50 uppercase tracking-widest mb-4 text-xs md:text-sm">
+        {label}
+      </p>
+      <div className="flex gap-3 md:gap-8 overflow-x-auto pb-4 -mx-4 px-4 md:-mx-8 md:px-8 snap-x snap-mandatory [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden">
+        {items.map((cert, index) => (
+          <CertCard key={cert.id} cert={cert} index={index} />
+        ))}
+      </div>
+    </div>
+  );
+}
+
 export default function Contact() {
+  const press = certificates.filter((c) => c.type === 'article');
+  const awards = certificates.filter((c) => c.type === 'pdf');
+
   return (
     <section id="contact" className="w-full bg-[#050505] text-[#F5E1D9] relative z-10 pt-24 md:pt-32 pb-12">
       <div className="max-w-[1440px] mx-auto px-4 md:px-8">
-        
+
         <div className="mb-20">
           <div className="flex flex-col md:flex-row md:items-end justify-between border-b border-[#F5E1D9]/20 pb-8 mb-12">
             <h2 className={`${leagueGothic.className} text-6xl md:text-8xl tracking-wide uppercase text-[#DC2626]`}>
@@ -20,65 +101,9 @@ export default function Contact() {
             </p>
           </div>
 
-          <div className="grid grid-cols-2 gap-3 md:gap-8 max-w-4xl">
-            {certificates.map((cert, index) => (
-              <motion.a 
-                key={cert.id}
-                href={cert.link}
-                target="_blank"
-                rel="noopener noreferrer"
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.6, delay: index * 0.1 }}
-                className="group block relative w-full aspect-[4/3] bg-[#0A0A0A] border border-[#F5E1D9]/10 overflow-hidden cursor-pointer"
-              >
-                <Image 
-                  src={cert.image} 
-                  alt={cert.title} 
-                  fill 
-                  className="object-cover opacity-50 group-hover:opacity-30 transition-opacity duration-500 grayscale group-hover:grayscale-0 mix-blend-luminosity"
-                />
-                
-                <div className="absolute inset-0 p-3 md:p-6 flex flex-col justify-between z-10">
-                  <div className="flex justify-between items-start">
-                    <span className="font-mono text-[9px] md:text-xs opacity-70 uppercase border border-[#F5E1D9]/20 px-1.5 md:px-2 py-0.5 md:py-1">
-                      {cert.year}
-                    </span>
-                    
-                    {cert.type === 'pdf' ? (
-                      <svg viewBox="0 0 24 24" fill="none" stroke="#F5E1D9" strokeWidth="1.5" className="w-4 h-4 md:w-6 md:h-6 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                        <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2-2V8z"></path>
-                        <polyline points="14 2 14 8 20 8"></polyline>
-                        <line x1="12" y1="18" x2="12" y2="12"></line>
-                        <line x1="9" y1="15" x2="15" y2="15"></line>
-                      </svg>
-                    ) : (
-                      <svg viewBox="0 0 24 24" fill="none" stroke="#F5E1D9" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" className="w-4 h-4 md:w-6 md:h-6 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                        <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
-                        <polyline points="15 3 21 3 21 9"></polyline>
-                        <line x1="10" y1="14" x2="21" y2="3"></line>
-                      </svg>
-                    )}
-                  </div>
-                  
-                  <div>
-                    <h3 className={`${leagueGothic.className} text-2xl md:text-4xl uppercase tracking-wide leading-none md:leading-tight group-hover:text-[#DC2626] transition-colors`}>
-                      {cert.title}
-                    </h3>
-                    <p className="font-mono text-[9px] md:text-sm opacity-70 mt-1 md:mt-2 uppercase leading-tight">
-                      {cert.issuer}
-                    </p>
-                  </div>
-                </div>
-
-                <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-500 bg-black/40 backdrop-blur-sm z-0">
-                  <span className="font-mono text-[10px] md:text-sm tracking-widest uppercase border-b border-[#DC2626] text-[#F5E1D9] pb-1">
-                    {cert.type === 'pdf' ? 'View PDF' : 'Read Article'}
-                  </span>
-                </div>
-              </motion.a>
-            ))}
+          <div className="flex flex-col gap-12">
+            <CertRow label="[ Press ]" items={press} />
+            <CertRow label="[ Certificates ]" items={awards} />
           </div>
         </div>
 
