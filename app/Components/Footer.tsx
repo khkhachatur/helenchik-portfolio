@@ -1,6 +1,7 @@
 'use client';
 
 import { leagueGothic } from '../lib/fonts';
+import SetkaSign from './SetkaSign';
 
 export default function Footer() {
   return (
@@ -61,6 +62,7 @@ export default function Footer() {
             <p>© {new Date().getFullYear()} Helen Khachatryan.</p>
             <p>All Rights Reserved.</p>
           </div>
+          <SetkaSign className="mt-6" />
         </div>
 
       </div>
